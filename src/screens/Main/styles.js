@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -85,3 +86,53 @@ export const EmptyUsersText = styled.Text`
 `;
 
 export const LogoutButton = styled.TouchableOpacity``;
+
+export const MatchContainer = styled.View`
+  ${StyleSheet.absoluteFillObject};
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+export const ItsAMatchImage = styled.Image`
+  height: 60px;
+  resize-mode: contain;
+`;
+
+export const MatchDevAvatar = styled.Image`
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+  border-width: 5px;
+  border-color: #fff;
+  margin: 30px 0;
+`;
+
+export const MatchDevName = styled.Text`
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+`;
+
+export const MatchDevBio = styled.Text`
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  padding-horizontal: 30px;
+  max-width: 400px;
+  color: rgba(255, 255, 255, 0.8);
+`;
+
+export const CloseMatchButton = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+`;
+
+export const CloseMatchButtonText = styled.Text`
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  text-align: center;
+`;

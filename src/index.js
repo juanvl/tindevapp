@@ -1,8 +1,10 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, YellowBox } from "react-native";
 import "~config/ReactotronConfig";
 
 import Routes from "~routes";
+
+YellowBox.ignoreWarnings(["Unrecognized WebSocket"]);
 
 const App = () => (
   <>

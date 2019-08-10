@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import api from "~services/api";
 import logo from "~assets/logo.png";
 import like from "~assets/like.png";
 import dislike from "~assets/dislike.png";
+import itsamatch from "~assets/itsamatch.png";
+
 import * as S from "./styles";
 
 const Main = ({ navigation }) => {
   const userId = navigation.getParam("userId");
   const [users, setUsers] = useState([]);
+  const [matchDev, setMatchDev] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -20,6 +24,16 @@ const Main = ({ navigation }) => {
       });
       setUsers(res.data);
     })();
+  }, [userId]);
+
+  useEffect(() => {
+    const socket = io("http://localhost:3333", {
+      query: { userId }
+    });
+
+    socket.on("match", dev => {
+      setMatchDev(dev);
+    });
   }, [userId]);
 
   const handleLike = async () => {
@@ -86,6 +100,22 @@ const Main = ({ navigation }) => {
         </>
       ) : (
         <S.EmptyUsersText>Acabaram os devs :/</S.EmptyUsersText>
+      )}
+
+      {matchDev && (
+        <S.MatchContainer>
+          <S.ItsAMatchImage source={itsamatch} />
+          <S.MatchDevAvatar
+            source={{
+              uri: matchDev.avatar
+            }}
+          />
+          <S.MatchDevName>{matchDev.name}</S.MatchDevName>
+          <S.MatchDevBio>{matchDev.bio}</S.MatchDevBio>
+          <S.CloseMatchButton type="button" onPress={() => setMatchDev(null)}>
+            <S.CloseMatchButtonText>Fechar</S.CloseMatchButtonText>
+          </S.CloseMatchButton>
+        </S.MatchContainer>
       )}
     </S.Container>
   );
